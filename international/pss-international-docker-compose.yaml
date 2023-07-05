@@ -1,0 +1,298 @@
+networks:
+  d2-cluster-2380_default:
+    external: yes
+    name: "d2-cluster-2380_default"
+  docker_default:
+    external: yes
+    name: "docker_default"
+  pss-survey_default:
+    external: yes
+    name: "pss-survey_default"
+
+services:
+
+  d2-cluster-2380-core-1:
+
+    command:
+      - "catalina.sh"
+      - "run"
+
+    container_name: "d2-cluster-2380-core-1"
+
+    entrypoint:
+      - "/usr/local/bin/docker-entrypoint.sh"
+
+    environment:
+      env_file:
+      - international.env
+
+    expose:
+      - "8080/tcp"
+
+    hostname: "bb9603bce69a"
+
+    image: "dhis2/core:2.38.0"
+
+    ipc: "private"
+
+    labels:
+      com.docker.compose.config-hash: "da1269e09a3686b492216f004f769b03d33bc6c3f3e2b44aef346dfdea48708d"
+      com.docker.compose.container-number: "1"
+      com.docker.compose.depends_on: "db:service_started"
+      com.docker.compose.image: "sha256:e7c014f1b97fc61e3e4646f3d2989d0f892070e59a5689faa427f63c09d3ce5d"
+      com.docker.compose.oneoff: "False"
+      com.docker.compose.project: "d2-cluster-2380"
+      com.docker.compose.project.config_files: "/root/.cache/d2/cache/clusters/2.38.0/docker-compose/cluster/docker-compose.yml"
+      com.docker.compose.project.working_dir: "/root/.cache/d2/cache/clusters/2.38.0/docker-compose/cluster"
+      com.docker.compose.service: "core"
+      com.docker.compose.version: "2.16.0"
+      identifier: "2.38.0"
+
+    logging:
+      driver: "json-file"
+      options: {}
+
+    networks:
+      - "d2-cluster-2380_default"
+
+    restart: "always"
+
+    volumes:
+      - "d2-cluster-2380_home:/DHIS2_home"
+      - "/root/.cache/d2/cache/clusters/2.38.0/docker-compose/cluster/config/DHIS2_home/dhis.conf:/DHIS2_home/dhis.conf"
+      - "/root/.cache/d2/cache/clusters/2.38.0/docker-compose/cluster/config/DHIS2_home/log4j2.xml:/DHIS2_home/log4j2.xml"
+      - "/root/.cache/d2/cache/clusters/2.38.0/docker-compose/cluster/config/server.xml:/usr/local/tomcat/conf/server.xml"
+
+    working_dir: "/usr/local/tomcat"
+
+  d2-cluster-2380-db-1:
+
+    command:
+      - "postgres"
+      - "-c"
+      - "max_locks_per_transaction=100"
+
+    container_name: "d2-cluster-2380-db-1"
+
+    entrypoint:
+      - "docker-entrypoint.sh"
+
+    environment:
+      env_file:
+      - international.env
+
+    expose:
+      - "5432/tcp"
+
+    hostname: "3a47b6c7bcc8"
+
+    image: "ghcr.io/baosystems/postgis:12-3.3"
+
+    ipc: "private"
+
+    labels:
+      com.docker.compose.config-hash: "75bc47a564bc83ab5afb675141ce6d71cecd4fcc595fb3686ba863d473154007"
+      com.docker.compose.container-number: "1"
+      com.docker.compose.depends_on: ""
+      com.docker.compose.image: "sha256:8813987319a67cfbea5c02dfbab39aad85f413daa67c4861c652bfd5a47579ba"
+      com.docker.compose.oneoff: "False"
+      com.docker.compose.project: "d2-cluster-2380"
+      com.docker.compose.project.config_files: "/root/.cache/d2/cache/clusters/2.38.0/docker-compose/cluster/docker-compose.yml"
+      com.docker.compose.project.working_dir: "/root/.cache/d2/cache/clusters/2.38.0/docker-compose/cluster"
+      com.docker.compose.service: "db"
+      com.docker.compose.version: "2.16.0"
+      maintainer: "PostGIS Project - https://postgis.net"
+      org.opencontainers.image.base.name: "docker.io/postgis/postgis:12-3.3"
+      org.opencontainers.image.created: "2023-02-28T05:22:08.996Z"
+      org.opencontainers.image.description: "Fork of upstream. No support provided."
+      org.opencontainers.image.licenses: "MIT"
+      org.opencontainers.image.revision: "128424b9fd5102ed12fb9203393862780647a831"
+      org.opencontainers.image.source: "https://github.com/baosystems/docker-postgis"
+      org.opencontainers.image.title: "postgis"
+      org.opencontainers.image.url: "https://github.com/baosystems/docker-postgis"
+      org.opencontainers.image.version: "12-3.3"
+
+    logging:
+      driver: "json-file"
+      options: {}
+
+    networks:
+      - "d2-cluster-2380_default"
+
+    restart: "always"
+
+    volumes:
+      - "d2-cluster-2380_datadb:/var/lib/postgresql/data"
+
+  d2-cluster-2380-gateway-1:
+
+    command:
+      - "forego"
+      - "start"
+      - "-r"
+
+    container_name: "d2-cluster-2380-gateway-1"
+
+    entrypoint:
+      - "/app/docker-entrypoint.sh"
+
+    environment:
+      env_file:
+      - international.env
+
+    hostname: "defc9d042841"
+
+    image: "jwilder/nginx-proxy:alpine"
+
+    ipc: "private"
+
+    labels:
+      com.docker.compose.config-hash: "bf5ed361fa4f610ab50c063be80d30c0af1dc77b083281dd769ef0d24da268d5"
+      com.docker.compose.container-number: "1"
+      com.docker.compose.depends_on: ""
+      com.docker.compose.image: "sha256:46d8a077f1a0bbda38bf690115a42ddc0a684de27236ea63b6debfb8d24e2d80"
+      com.docker.compose.oneoff: "False"
+      com.docker.compose.project: "d2-cluster-2380"
+      com.docker.compose.project.config_files: "/root/.cache/d2/cache/clusters/2.38.0/docker-compose/cluster/docker-compose.yml"
+      com.docker.compose.project.working_dir: "/root/.cache/d2/cache/clusters/2.38.0/docker-compose/cluster"
+      com.docker.compose.service: "gateway"
+      com.docker.compose.version: "2.16.0"
+      maintainer: "NGINX Docker Maintainers <docker-maint@nginx.com>"
+      org.opencontainers.image.authors: "Nicolas Duchon <nicolas.duchon@gmail.com>\
+        \ (@buchdag), Jason Wilder"
+      org.opencontainers.image.created: "2023-02-28T07:50:38.532Z"
+      org.opencontainers.image.description: "Automated nginx proxy for Docker containers\
+        \ using docker-gen"
+      org.opencontainers.image.licenses: "MIT"
+      org.opencontainers.image.revision: "abcef6be86b505159fd79edae3f2fe7f3fa24fba"
+      org.opencontainers.image.source: "https://github.com/nginx-proxy/nginx-proxy"
+      org.opencontainers.image.title: "nginx-proxy"
+      org.opencontainers.image.url: "https://github.com/nginx-proxy/nginx-proxy"
+      org.opencontainers.image.version: "1.2.1-14-gabcef6b"
+
+    logging:
+      driver: "json-file"
+      options: {}
+
+    networks:
+      - "d2-cluster-2380_default"
+
+    ports:
+      - "8080:80/tcp"
+
+    restart: "always"
+
+    volumes:
+      - "/root/.cache/d2/cache/clusters/2.38.0/docker-compose/cluster/.apps:/data/apps:ro"
+      - "/root/.cache/d2/cache/clusters/2.38.0/docker-compose/cluster/config/nginx.conf:/etc/nginx/nginx.conf:ro"
+      - "/var/run/docker.sock:/tmp/docker.sock:ro"
+
+    working_dir: "/app"
+
+  dhis_pss_international:
+    container_name: "dhis_pss_international"
+    entrypoint:
+      - "java"
+      - "-jar"
+      - "target/InternationalInstance.jar"
+    environment:
+      env_file:
+      - international.env
+    hostname: "7de7266e7c69"
+    image: "intellisoftdev/dhis_pss_international:v3"
+    ipc: "private"
+    logging:
+      driver: "json-file"
+      options: {}
+    mac_address: "02:42:ac:11:00:02"
+    network_mode: "bridge"
+    ports:
+      - "7009:7009/tcp"
+    working_dir: "/international_javabackend"
+
+  international_db:
+    command:
+      - "postgres"
+    container_name: "international_db"
+    entrypoint:
+      - "docker-entrypoint.sh"
+    environment:
+      - "POSTGRES_DB=international_db"
+      - "POSTGRES_USER=postgres"
+      - "POSTGRES_PASSWORD=postgres"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "LANG=en_US.utf8"
+      - "PG_MAJOR=14"
+      - "PG_VERSION=14.1"
+      - "PG_SHA256=4d3c101ea7ae38982f06bdc73758b53727fb6402ecd9382006fa5ecc7c2ca41f"
+      - "PGDATA=/var/lib/postgresql/data"
+    hostname: "bc34c5438288"
+    image: "postgres:14.1-alpine"
+    ipc: "private"
+    labels:
+      com.docker.compose.config-hash: "185bee7242e6dd35a3c0adab084cc1ef1466733c6662e8274f17e0dd526f73ae"
+      com.docker.compose.container-number: "1"
+      com.docker.compose.depends_on: ""
+      com.docker.compose.image: "sha256:1149d285a5f5c4340cefa2211869c3a6b1128ac78974545e0b4fe62d3d0e66a8"
+      com.docker.compose.oneoff: "False"
+      com.docker.compose.project: "docker"
+      com.docker.compose.project.config_files: "/home/dnjau/Docker/docker-compose-postgres.yml"
+      com.docker.compose.project.working_dir: "/home/dnjau/Docker"
+      com.docker.compose.service: "db"
+      com.docker.compose.version: "2.16.0"
+    logging:
+      driver: "json-file"
+      options: {}
+    networks:
+      - "docker_default"
+    ports:
+      - "5437:5432/tcp"
+    restart: "always"
+    volumes:
+      - "docker_db:/var/lib/postgresql/data"
+
+  survey:
+    command:
+      - "nginx"
+      - "-g"
+      - "daemon off;"
+    container_name: "survey"
+    entrypoint:
+      - "/docker-entrypoint.sh"
+    environment:
+      env_file:
+      - international.env
+    hostname: "f643be53180b"
+    image: "pss-survey-survey"
+    ipc: "private"
+    labels:
+      com.docker.compose.config-hash: "6aaf4eb59f740780c793a74b199fd59ec6a071ce00537a16698c4fb937df13e9"
+      com.docker.compose.container-number: "1"
+      com.docker.compose.depends_on: ""
+      com.docker.compose.image: "sha256:7321ea53ffa66f31f9d15d0949a5ece803f5aa0ad7d2572b027fd73b70196764"
+      com.docker.compose.oneoff: "False"
+      com.docker.compose.project: "pss-survey"
+      com.docker.compose.project.config_files: "/opt/PSS-survey/docker-compose.yml"
+      com.docker.compose.project.working_dir: "/opt/PSS-survey"
+      com.docker.compose.replace: "d4f695fbdd841ef850c5e82707038920b09d43ed3ce825acd2ae8b7b3eeca3dc"
+      com.docker.compose.service: "survey"
+      com.docker.compose.version: "2.16.0"
+      maintainer: "NGINX Docker Maintainers <docker-maint@nginx.com>"
+    logging:
+      driver: "json-file"
+      options: {}
+    networks:
+      - "pss-survey_default"
+    ports:
+      - "3001:3001/tcp"
+    restart: "unless-stopped"
+
+version: "3.6"
+
+volumes:
+  d2-cluster-2380_datadb:
+    external: yes
+  d2-cluster-2380_home:
+    external: yes
+  docker_db:
+    external: yes

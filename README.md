@@ -4,7 +4,7 @@ Deployment scripts
 
   
 
-- The Docker compose file :  ```pss-docker-compose.yaml```  can be started by running the following command:
+- The Docker compose files :  ```pss-national-docker-compose.yaml```  and ```pss-international-docker-compose.yaml```  can be started by running the following command:
 
 ```
 docker-compose up
