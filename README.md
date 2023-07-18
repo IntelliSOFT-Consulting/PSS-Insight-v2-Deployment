@@ -1,22 +1,23 @@
 # PSS-Insight-v2-Deployment
 
-Deployment scripts
-
   
+OS Architecture pre-requisite: **linux/amd64**
 
-- The Docker compose files :  ```docker-compose.yaml```  and ```-docker-compose.yaml```  in either national or international folders can be started by running the following command:
+**Deployment scripts**
+
+- The Docker compose files : ```docker-compose.yaml```  in either of the `national` or `international` folders can be started by running the following command:
+
+
 
 ```
 docker-compose up
-
 ```
 
-This will start all of the services in the Docker compose file. 
+This will start all of the services in the Docker compose file.
 
-Note:
--   The Docker compose file and the .env file need to be in the same directory.
--   The .env file needs to have the environment variables defined.
--   The Docker compose file needs to have the correct image names and ports defined.
+**Bash Scripts**
+
+ 1. The script references the relevant Docker Compose files and Dockerfiles which are in the same directory as the script itself. To make the script file executable e.g: `national_script.sh` run `chmod +x national_script.sh` 
 
 The Docker compose file can be stopped by running the following command:
 
