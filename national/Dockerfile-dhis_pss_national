@@ -1,0 +1,8 @@
+# Use the base image from Docker Hub for the DHIS PSS National Instance version v1
+FROM intellisoftdev/dhis_pss_national:v1
+
+# Expose port 7001 for the DHIS PSS National Instance application
+EXPOSE 7001
+
+# Set the entrypoint and command for the container to start the DHIS PSS National Instance
+ENTRYPOINT ["java", "-jar", "target/PssNationalInstance.jar"]

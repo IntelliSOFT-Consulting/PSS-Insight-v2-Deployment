@@ -1,0 +1,11 @@
+# Use the base image from Docker Hub for Nginx Proxy (jwilder/nginx-proxy:alpine)
+FROM jwilder/nginx-proxy:alpine
+
+# Set required environment variables (if any)
+
+# Expose port 80 for Nginx
+EXPOSE 80
+
+# Set the entrypoint and command for the container to start Nginx
+ENTRYPOINT ["/app/docker-entrypoint.sh"]
+CMD ["forego", "start", "-r"]

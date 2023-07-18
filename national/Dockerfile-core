@@ -1,0 +1,14 @@
+# Use the base image from Docker Hub for DHIS2 Core version 2.38.0
+FROM dhis2/core:2.38.0
+
+# Set the DHIS2_HOME environment variable
+ENV DHIS2_HOME /DHIS2_home
+
+# Set other required environment variables (if any)
+
+# Expose port 8080 for DHIS2 Core application
+EXPOSE 8080
+
+# Set the entrypoint and command for the container to start DHIS2 Core
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
+CMD ["catalina.sh", "run"]
