@@ -9,8 +9,8 @@
 
 ### Step 1: Clone the Repository
 
- - Clone the repository containing the Docker Compose files to your local environment. There are two folders (`national` & `international` each of which have `docker-compose.yml` files.
- - cd into each folder to start the network setup
+ - Clone the repository containing the Docker Compose files to your local environment. `cd`into the repo and then into the `national` folder which has the `docker-compose.yml` file.
+ - cd into `national` folder to start the network setup
 
 ### Step 2: Network Setup
 
