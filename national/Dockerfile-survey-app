@@ -1,0 +1,17 @@
+# Base image
+FROM intellisoftdev/pss-survey
+
+# Set the working directory
+WORKDIR /app
+
+# Environment variables
+ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ENV NGINX_VERSION=1.25.1
+ENV PKG_RELEASE=1
+ENV NJS_VERSION=0.7.12
+
+# Expose the port
+EXPOSE 3000
+
+# Command to run the container
+CMD ["nginx", "-g", "daemon off;"]

@@ -1,0 +1,32 @@
+# Base image
+FROM dhis2/core:2.38.0
+
+# Set the working directory
+WORKDIR /usr/local/tomcat
+
+# Copy the required files
+COPY /root/.cache/d2/cache/clusters/2.38.0/docker-compose/cluster/config/server.xml /usr/local/tomcat/conf/server.xml
+COPY /root/.cache/d2/cache/clusters/2.38.0/docker-compose/cluster/config/DHIS2_home/dhis.conf /DHIS2_home/dhis.conf
+COPY /root/.cache/d2/cache/clusters/2.38.0/docker-compose/cluster/config/DHIS2_home/log4j2.xml /DHIS2_home/log4j2.xml
+
+# Environment variables
+ENV DHIS2_HOME=/DHIS2_home
+ENV CATALINA_OPTS="-Dcontext.path='' -Dlog4j2.configurationFile=/DHIS2_home/log4j2.xml"
+ENV PATH=/usr/local/tomcat/bin:/usr/local/openjdk-11/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ENV JAVA_HOME=/usr/local/openjdk-11
+ENV LANG=C.UTF-8
+ENV JAVA_VERSION=11.0.15
+ENV CATALINA_HOME=/usr/local/tomcat
+ENV TOMCAT_NATIVE_LIBDIR=/usr/local/tomcat/native-jni-lib
+ENV LD_LIBRARY_PATH=/usr/local/tomcat/native-jni-lib
+ENV GPG_KEYS="48F8E69F6390C9F25CFEDCD268248959359E722B A9C5DF4D22E99998D9875A5110C01C5A2F6059E7 DCFD35E0BF8CA7344752DE8B6FB21E8933C60243"
+ENV TOMCAT_MAJOR=9
+ENV TOMCAT_VERSION=9.0.62
+ENV TOMCAT_SHA512="179af1d50a7d330d0842d3f1cae086bbc1b20e8f6752d66500663f3ac71d80f50113bbd29931e21c8e2eccd982f9f872e193364311316fdd67349130d440c83f"
+ENV WAIT_FOR_DB_CONTAINER=""
+
+# Expose the port
+EXPOSE 8080
+
+# Command to run the container
+CMD ["catalina.sh", "run"]

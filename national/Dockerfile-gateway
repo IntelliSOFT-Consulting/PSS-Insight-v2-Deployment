@@ -1,0 +1,24 @@
+# Base image
+FROM jwilder/nginx-proxy:alpine
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the required files
+COPY /root/.cache/d2/cache/clusters/2.38.0/docker-compose/cluster/.apps /data/apps
+COPY /root/.cache/d2/cache/clusters/2.38.0/docker-compose/cluster/config/nginx.conf /etc/nginx/nginx.conf
+
+# Environment variables
+ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ENV NGINX_VERSION=1.23.3
+ENV PKG_RELEASE=1
+ENV NJS_VERSION=0.7.9
+ENV NGINX_PROXY_VERSION=1.2.1-14-gabcef6b
+ENV DOCKER_GEN_VERSION=0.10.1
+ENV DOCKER_HOST=unix:///tmp/docker.sock
+
+# Expose the port
+EXPOSE 80
+
+# Command to run the container
+CMD ["forego", "start", "-r"]

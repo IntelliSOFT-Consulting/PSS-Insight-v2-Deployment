@@ -1,25 +1,54 @@
 # PSS-Insight-v2-Deployment
 
-Deployment scripts
+## Deployment Instructions
 
-  
+### Pre-requisites
 
-- The Docker compose files :  ```docker-compose.yaml```  and ```-docker-compose.yaml```  in either national or international folders can be started by running the following command:
+- OS Architecture: **linux/amd64**  
+- Docker and Docker Compose should be installed on your system.
+
+### Step 1: Clone the Repository
+
+ - Clone the repository containing the Docker Compose files to your local environment. There are two folders (`national` & `international` each of which have `docker-compose.yml` files.
+ - cd into each folder to start the network setup
+
+### Step 2: Network Setup
+
+Before deploying the services, ensure that the required networks are already created and available in Docker. There are two networks: `d2-cluster-2380_default` and `docker_default` You can create these networks using the following commands:
 
 ```
-docker-compose up
+docker network create d2-cluster-2380_default
+docker network create docker_default
+````
+
+### Step 3: Deploy the Services
+
+Run the following command to deploy all the services defined in the docker-compose.yml file in each folder:
 
 ```
+docker-compose up -d
+```
+This will start the containers, allowing them to run in the background.
 
-This will start all of the services in the Docker compose file. 
+### Step 4: Verify Deployment
 
-Note:
--   The Docker compose file and the .env file need to be in the same directory.
--   The .env file needs to have the environment variables defined.
--   The Docker compose file needs to have the correct image names and ports defined.
+After the deployment is complete, you can check the status of the containers using the following command:
 
-The Docker compose file can be stopped by running the following command:
+```
+docker-compose ps
+```
 
+This will display the status of each service, along with their container names and other details.
+
+### Step 5: Clean Up
+
+To stop and remove all the containers while preserving the data volumes, use the following command:
 ```
 docker-compose down
+```
+
+To remove the containers as well as the associated data volumes, use the following command:
+
+```
+docker-compose down -v
 ```

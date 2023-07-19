@@ -1,0 +1,17 @@
+# Base image
+FROM intellisoftdev/dhis_pss_national:v1
+
+# Set the working directory
+WORKDIR /national_javabackend
+
+# Environment variables
+ENV PATH=/usr/local/openjdk-11/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ENV JAVA_HOME=/usr/local/openjdk-11
+ENV LANG=C.UTF-8
+ENV JAVA_VERSION=11.0.16
+
+# Expose the port
+EXPOSE 7001
+
+# Command to run the container
+ENTRYPOINT ["java", "-jar", "target/PssNationalInstance.jar"]
