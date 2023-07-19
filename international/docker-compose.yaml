@@ -42,6 +42,9 @@ services:
     hostname: "bb9603bce69a"
 
     image: "dhis2/core:2.38.0"
+    build:
+      context: .
+      dockerfile: Dockerfile-core
 
     ipc: "private"
 
@@ -106,6 +109,9 @@ services:
     hostname: "3a47b6c7bcc8"
 
     image: "ghcr.io/baosystems/postgis:12-3.3"
+    build:
+      context: .
+      dockerfile: Dockerfile-db
 
     ipc: "private"
 
@@ -167,6 +173,9 @@ services:
     hostname: "defc9d042841"
 
     image: "jwilder/nginx-proxy:alpine"
+    build:
+      context: .
+      dockerfile: Dockerfile-gateway
 
     ipc: "private"
 
@@ -226,6 +235,10 @@ services:
       - "JAVA_VERSION=11.0.16"
     hostname: "9536420637e7"
     image: "intellisoftdev/dhis_pss_international:v3"
+    build:
+      context: .
+      dockerfile: Dockerfile-dhis_pss_international
+    
     ipc: "private"
     logging:
       driver: "json-file"
@@ -254,6 +267,10 @@ services:
       - "PGDATA=/var/lib/postgresql/data"
     hostname: "bc34c5438288"
     image: "postgres:14.1-alpine"
+    build:
+      context: .
+      dockerfile: Dockerfile-international_db
+
     ipc: "private"
     labels:
       com.docker.compose.config-hash: "185bee7242e6dd35a3c0adab084cc1ef1466733c6662e8274f17e0dd526f73ae"
