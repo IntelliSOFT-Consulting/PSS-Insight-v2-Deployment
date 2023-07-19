@@ -1,11 +1,17 @@
-# Use the base image from Docker Hub for the survey app (intellisoftdev/pss-survey)
+# Base image
 FROM intellisoftdev/pss-survey
 
-# Set required environment variables (if any)
+# Set the working directory
+WORKDIR /app
 
-# Expose port 3000 for the survey app
+# Environment variables
+ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ENV NGINX_VERSION=1.25.1
+ENV PKG_RELEASE=1
+ENV NJS_VERSION=0.7.12
+
+# Expose the port
 EXPOSE 3000
 
-# Set the entrypoint and command for the container to start the survey app with Nginx
-ENTRYPOINT ["docker-entrypoint.sh"]
+# Command to run the container
 CMD ["nginx", "-g", "daemon off;"]

@@ -1,8 +1,17 @@
-# Use the base image from Docker Hub for the DHIS PSS National Instance version v1
+# Base image
 FROM intellisoftdev/dhis_pss_national:v1
 
-# Expose port 7001 for the DHIS PSS National Instance application
+# Set the working directory
+WORKDIR /national_javabackend
+
+# Environment variables
+ENV PATH=/usr/local/openjdk-11/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ENV JAVA_HOME=/usr/local/openjdk-11
+ENV LANG=C.UTF-8
+ENV JAVA_VERSION=11.0.16
+
+# Expose the port
 EXPOSE 7001
 
-# Set the entrypoint and command for the container to start the DHIS PSS National Instance
+# Command to run the container
 ENTRYPOINT ["java", "-jar", "target/PssNationalInstance.jar"]

@@ -1,14 +1,24 @@
-# Use the base image from Docker Hub for PostGIS version 12-3.3
+# Base image
 FROM ghcr.io/baosystems/postgis:12-3.3
 
-# Set environment variables for PostgreSQL and PostGIS configuration
-ENV POSTGRES_PASSWORD dhis
-ENV POSTGRES_DB dhis2
-ENV POSTGRES_USER dhis
+# Set the working directory
+WORKDIR /
 
-# Expose port 5432 for PostgreSQL
+# Environment variables
+ENV POSTGRES_PASSWORD=dhis
+ENV POSTGRES_DB=dhis2
+ENV POSTGRES_USER=dhis
+ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/postgresql/12/bin
+ENV GOSU_VERSION=1.16
+ENV LANG=en_US.utf8
+ENV PG_MAJOR=12
+ENV PG_VERSION=12.14-1.pgdg110+1
+ENV PGDATA=/var/lib/postgresql/data
+ENV POSTGIS_MAJOR=3
+ENV POSTGIS_VERSION=3.3.2+dfsg-1.pgdg110+1
+
+# Expose the port
 EXPOSE 5432
 
-# Set the entrypoint and command for the container to start PostgreSQL
-ENTRYPOINT ["docker-entrypoint.sh"]
+# Command to run the container
 CMD ["postgres", "-c", "max_locks_per_transaction=100"]
