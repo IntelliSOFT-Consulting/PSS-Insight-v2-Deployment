@@ -1,0 +1,22 @@
+# Use the official PostgreSQL image as the base image
+FROM postgres:14.1-alpine
+
+# Set environment variables for the PostgreSQL database
+ENV POSTGRES_USER=postgres
+ENV POSTGRES_PASSWORD=postgres
+ENV POSTGRES_DB=national_db,file_storage
+ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ENV LANG=en_US.utf8
+ENV PG_MAJOR=14
+ENV PG_VERSION=14.1
+ENV PG_SHA256=4d3c101ea7ae38982f06bdc73758b53727fb6402ecd9382006fa5ecc7c2ca41f
+ENV PGDATA=/var/lib/postgresql/data
+
+# Expose the default PostgreSQL port (5432)
+EXPOSE 5432
+
+# Use the docker-entrypoint.sh script as the container's entrypoint
+ENTRYPOINT ["docker-entrypoint.sh"]
+
+# Specify the default command to run when the container starts
+CMD ["postgres"]
