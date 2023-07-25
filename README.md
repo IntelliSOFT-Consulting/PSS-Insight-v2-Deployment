@@ -5,12 +5,12 @@
 ### Pre-requisites
 
 - OS Architecture: **linux/amd64**  
-- Docker and Docker Compose should be installed on your system.
+- Docker and Docker Compose should be installed on your system. Instructions for installing on an Ubuntu OS can be found here https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-22-04
 
 ### Step 1: Clone the Repository
 
- - Clone the repository containing the Docker Compose files to your local environment. `cd`into the repo and then into the `national` folder which has the `docker-compose.yml` file.
- - cd into `national` folder to start the network setup
+ - Clone this repository into to your local environment
+ - cd into the `national` folder to start the network setup
 
 ### Step 2: Network Setup
 
