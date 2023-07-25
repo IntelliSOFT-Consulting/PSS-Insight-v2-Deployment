@@ -295,6 +295,7 @@ services:
       - NGINX_VERSION=1.25.1
       - PKG_RELEASE=1
       - NJS_VERSION=0.7.12
+      - REACT_APP_API_URL=https://pssnational2.intellisoftkenya.com
     hostname: 9ce9118d34a9
     image: intellisoftdev/pss-survey
     build:
