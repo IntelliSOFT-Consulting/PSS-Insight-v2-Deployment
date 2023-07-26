@@ -1,4 +1,4 @@
-# PSS-Insight-v2-Deployment
+<img width="627" alt="image" src="https://github.com/IntelliSOFT-Consulting/PSS-Insight-v2-Deployment-national/assets/1963527/18869ea8-90c4-4fb7-86b5-57cc33ed3fdc"># PSS-Insight-v2-Deployment
 
 ## Deployment Instructions
 
@@ -17,4 +17,19 @@
 
 ### Step 3: Deploy custom apps
 
+- #### Data entry app
+
+<<steps go here<>
+
+- #### Configuration app
+
+<<steps go here<>
+
+- #### Data import app
+
+<<steps go here<>
+
+- #### Indicator Sync app
+
+<<steps go here<>
 
