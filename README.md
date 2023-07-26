@@ -23,33 +23,17 @@ DHIS2 Server: You need to have a running DHIS2 instance accessible over the inte
 NodeJS: You need to have NodeJS V 14+ installed on your system. Instructions for installing NodeJS on an Ubuntu OS can be found here https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-22-04
 Yarn: You need to have Yarn installed on your system. Instructions for installing Yarn can be found here https://classic.yarnpkg.com/lang/en/docs/install
 
-- #### Data entry app
-1. clone the [data entry app repository](https://github.com/IntelliSOFT-Consulting/PSS-Insight-v2-Dataentry-Dhis2App.git) into your local environment
-2. cd into the `PSS-Insight-v2-Dataentry-Dhis2App` folder
-3. run `yarn install` to install the dependencies
-4. go to `src/api/api.js` and change the `baseURL` to point to your DHIS2 instance
-5. run `yarn build` to build the app
-6. run `yarn deploy` to deploy the app to your DHIS2 instance. You will be prompted to enter your DHIS2 credentials. Enter them and press enter. The app will be deployed to your DHIS2 instance.
+### Required keys
+| Field | Description | Example |
+| --- | --- | --- |
+| Enter the DHIS2 URL for the national instance | The URL of the DHIS2 instance you're deploying the app to | https://play.dhis2.org/2.37.0 |
+| Enter your DHIS2 username for the national instance | The username of the DHIS2 instance | admin |
+| Enter your DHIS2 password for the national instance | The password of the DHIS2 instance | district |
+| Enter the backend URL for national instance | The URL of the backend instance | https://pss-insight-backend-current.com |
+| Enter the backend URL for the international instance | The URL of the backend of international instance | https://pss-insight-backend-international.com |
 
-- #### Configuration app
-1. clone the [configuration app repository](https://github.com/IntelliSOFT-Consulting/PSS-Insight-v2-National-Dhis2App.git)
-2. cd into the `PSS-Insight-v2-National-Dhis2App` folder
-3. run `yarn install` to install the dependencies
-4. go to `src/api/api.js` and change the `baseURL` for `api` to point to your DHIS2 instance and the `baseURL` for `apiInternational` to point to the international instance
-5. run `yarn build` to build the app
-6. run `yarn deploy` to deploy the app to your DHIS2 instance. You will be prompted to enter your DHIS2 credentials. Enter them and press enter. The app will be deployed to your DHIS2 instance.
-
-- #### Data import app
-1. clone the [data import app repository](https://github.com/IntelliSOFT-Consulting/PSS-Insight-v2-Data-Import.git)
-2. cd into the `PSS-Insight-v2-Data-Import` folder
-3. run `yarn install` to install the dependencies
-4. run `yarn build` to build the app
-5. run `yarn deploy` to deploy the app to your DHIS2 instance. You will be prompted to enter your DHIS2 credentials. Enter them and press enter. The app will be deployed to your DHIS2 instance.
-
-- #### Indicator Sync app
-1. clone the [indicator sync app repository](https://github.com/IntelliSOFT-Consulting/PSS-Insight-v2-Indicator-Sync-Dhis2App.git)
-2. cd into the `PSS-Insight-v2-Indicator-Sync-Dhis2App` folder
-3. run `yarn install` to install the dependencies
-4. run `yarn build` to build the app
-5. run `yarn deploy` to deploy the app to your DHIS2 instance. You will be prompted to enter your DHIS2 credentials. Enter them and press enter. The app will be deployed to your DHIS2 instance.
+### Deploy
+- run `sudo chmod 755 ./webapps.sh` to make the script executable
+- run `./webapps.sh` to deploy the apps to your DHIS2 instance
+- Enter the required keys as prompted
 
