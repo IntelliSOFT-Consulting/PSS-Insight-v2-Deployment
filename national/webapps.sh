@@ -16,11 +16,26 @@ if ! command -v git &>/dev/null; then
 fi
 
 deploy_dhis2_app() {
-    echo "Cloning repository from $1"
-    git clone "$1"
-    app_folder=$(basename "$1" .git)
-    cd "$app_folder" || exit 1
+    echo "Downloading the release..."
 
+    # download the release zip file
+    curl -L -o app.zip "$1"
+
+    # extract the zip file
+    unzip -q app.zip
+
+    # get the app folder name: check any folder that starts with PSS
+    app_folder=$(find . -maxdepth 1 -type d -name "PSS*" -print -quit)
+
+    echo "Extracted the release to $app_folder"
+
+    # remove the zip file
+    rm app.zip
+
+    # change directory to the app folder
+    cd "$app_folder" || exit
+
+    # install dependencies, build and deploy the app
     echo "Installing dependencies..."
     yarn install
 
@@ -33,7 +48,6 @@ deploy_dhis2_app() {
     echo "Cleaning up..."
     cd ..
     rm -rf "$app_folder"
-
 }
 
 read -p "Enter the DHIS2 URL for the national instance: " dhis2_url
@@ -54,12 +68,6 @@ if [[ -z $password ]]; then
     exit 1
 fi
 
-read -p "Enter the backend URL for national instance: " backend_url
-if [[ ! $backend_url =~ ^https?:// ]]; then
-    echo "Invalid URL. Please enter a valid URL."
-    exit 1
-fi
-
 read -p "Enter the backend URL for the international instance: " dhis2_intl_url
 if [[ ! $dhis2_intl_url =~ ^https?:// ]]; then
     echo "Invalid URL. Please enter a valid URL."
@@ -67,27 +75,27 @@ if [[ ! $dhis2_intl_url =~ ^https?:// ]]; then
 fi
 
 # Data entry app
-data_entry_app_repo="https://github.com/IntelliSOFT-Consulting/PSS-Insight-v2-Dataentry-Dhis2App.git"
+data_entry_app_repo="https://github.com/IntelliSOFT-Consulting/PSS-Insight-v2-Dataentry-Dhis2App/archive/refs/tags/V1.0.0.zip"
 echo "Deploying Data Entry app..."
-echo "REACT_APP_NATIONAL_URL=$backend_url" >.env
+echo "REACT_APP_NATIONAL_URL=$dhis2_url" >.env
 
 deploy_dhis2_app "$data_entry_app_repo"
 
 # Configuration app
-config_app_repo="https://github.com/IntelliSOFT-Consulting/PSS-Insight-v2-National-Dhis2App.git"
+config_app_repo="https://github.com/IntelliSOFT-Consulting/PSS-Insight-v2-National-Dhis2App/archive/refs/tags/v1.0.0.zip"
 echo "Deploying Configuration app..."
-echo "REACT_APP_NATIONAL_URL=$backend_url" >.env
+echo "REACT_APP_NATIONAL_URL=$dhis2_url" >.env
 echo "REACT_APP_INTERNATIONAL_URL=$dhis2_intl_url" >>.env
 
 deploy_dhis2_app "$config_app_repo"
 
 # Data import app
-data_import_app_repo="https://github.com/IntelliSOFT-Consulting/PSS-Insight-v2-Data-Import.git"
+data_import_app_repo="https://github.com/IntelliSOFT-Consulting/PSS-Insight-v2-Data-Import/archive/refs/tags/v1.0.0.zip"
 echo "Deploying Data Import app..."
 deploy_dhis2_app "$data_import_app_repo"
 
 # Indicator Sync app
-indicator_sync_app_repo="https://github.com/IntelliSOFT-Consulting/PSS-Insight-v2-Indicator-Sync-Dhis2App.git"
+indicator_sync_app_repo="https://github.com/IntelliSOFT-Consulting/PSS-Insight-v2-Indicator-Sync-Dhis2App/archive/refs/tags/v1.0.0.zip"
 echo "Deploying Indicator Sync app..."
 deploy_dhis2_app "$indicator_sync_app_repo"
 
