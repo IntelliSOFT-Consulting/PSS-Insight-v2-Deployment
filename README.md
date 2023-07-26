@@ -26,7 +26,7 @@ Yarn: You need to have Yarn installed on your system. Instructions for installin
 ### Required keys
 | Field | Description | Example |
 | --- | --- | --- |
-| Enter the DHIS2 URL for the national instance | The URL of the DHIS2 instance you're deploying the app to | pasnational2.intellisoftkenya.com|
+| Enter the DHIS2 URL for the national instance | The URL of the DHIS2 instance you're deploying the app to | http://pssnational2.intellisoftkenya.com|
 | Enter your DHIS2 username for the national instance | The username of the DHIS2 instance | admin |
 | Enter your DHIS2 password for the national instance | The password of the DHIS2 instance | district |
 | Enter the backend URL for national instance | The URL of the backend instance | https://pss-insight-backend-current.com |
