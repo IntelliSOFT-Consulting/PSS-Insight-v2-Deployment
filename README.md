@@ -11,9 +11,9 @@
 
  - Clone this repository into to your local environment
  - cd into the `national` folder to start the network setup
+
+### Step 2: See below
  - Follow the instructions detailed [here](./national/README.md)
    
-### Step 2: Network Setup
 
-Before deploying the services, ensure that the required networks are already created and available in Docker. There are two networks: `d2-cluster-2380_default` and `docker_default` You can create these networks using the following commands:
 
