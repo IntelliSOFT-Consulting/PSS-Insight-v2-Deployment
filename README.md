@@ -29,10 +29,10 @@ Yarn: You need to have Yarn installed on your system. Instructions for installin
 | Enter the DHIS2 URL for the national instance | The URL of the DHIS2 instance you're deploying the app to | http://pssnational2.intellisoftkenya.com|
 | Enter your DHIS2 username for the national instance | The username of the DHIS2 instance | admin |
 | Enter your DHIS2 password for the national instance | The password of the DHIS2 instance | district |
-| Enter the backend URL for national instance | The URL of the backend instance | https://pss-insight-backend-current.com |
 | Enter the backend URL for the international instance | The URL of the backend of international instance | https://pss-insight-backend-international.com |
 
-#### Deploy
+### Deploy
+- cd into the `national` folder
 - run `sudo chmod 755 ./webapps.sh` to make the script executable
 - run `./webapps.sh` to deploy the apps to your DHIS2 instance
 - Enter the required keys as prompted
