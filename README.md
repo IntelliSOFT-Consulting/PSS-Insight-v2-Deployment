@@ -1,4 +1,4 @@
-<img width="627" alt="image" src="https://github.com/IntelliSOFT-Consulting/PSS-Insight-v2-Deployment-national/assets/1963527/18869ea8-90c4-4fb7-86b5-57cc33ed3fdc"># PSS-Insight-v2-Deployment
+# PSS-Insight-v2-Deployment
 
 ## Deployment Instructions
 
@@ -12,18 +12,18 @@
  - Clone this repository into to your local environment
  - cd into the `national` folder to start the network setup
 
-### Step 2: See below
+### Step 2: Docker deployment
  - Follow the instructions detailed [here](./national/README.md)
 
 ### Step 3: Deploy custom apps
 
-### Pre-requisites
+#### Pre-requisites
 
 DHIS2 Server: You need to have a running DHIS2 instance accessible over the internet.
 NodeJS: You need to have NodeJS V 14+ installed on your system. Instructions for installing NodeJS on an Ubuntu OS can be found here https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-22-04
 Yarn: You need to have Yarn installed on your system. Instructions for installing Yarn can be found here https://classic.yarnpkg.com/lang/en/docs/install
 
-### Required keys
+#### Required keys
 | Field | Description | Example |
 | --- | --- | --- |
 | Enter the DHIS2 URL for the national instance | The URL of the DHIS2 instance you're deploying the app to | http://pssnational2.intellisoftkenya.com|
@@ -32,7 +32,7 @@ Yarn: You need to have Yarn installed on your system. Instructions for installin
 | Enter the backend URL for national instance | The URL of the backend instance | https://pss-insight-backend-current.com |
 | Enter the backend URL for the international instance | The URL of the backend of international instance | https://pss-insight-backend-international.com |
 
-### Deploy
+#### Deploy
 - run `sudo chmod 755 ./webapps.sh` to make the script executable
 - run `./webapps.sh` to deploy the apps to your DHIS2 instance
 - Enter the required keys as prompted
