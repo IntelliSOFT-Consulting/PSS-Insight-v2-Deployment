@@ -22,6 +22,7 @@
 DHIS2 Server: You need to have a running DHIS2 instance accessible over the internet.
 NodeJS: You need to have NodeJS V 14+ installed on your system. Instructions for installing NodeJS on an Ubuntu OS can be found here https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-22-04
 Yarn: You need to have Yarn installed on your system. Instructions for installing Yarn can be found here https://classic.yarnpkg.com/lang/en/docs/install
+Unzip: You need to have unzip installed on your system.
 
 #### Required keys
 | Field | Description | Example |

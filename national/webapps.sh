@@ -15,6 +15,20 @@ if ! command -v git &>/dev/null; then
     exit 1
 fi
 
+if ! command -v unzip &>/dev/null; then
+    echo "unzip is not installed. Please install unzip before running this script."
+    exit 1
+fi
+
+node_version=$(node -v)
+if [[ $node_version =~ ^v([0-9]+)\. ]]; then
+    node_major_version="${BASH_REMATCH[1]}"
+    if [[ $node_major_version -lt 14 ]]; then
+        echo "node version must be >= 14. Please update node before running this script."
+        exit 1
+    fi
+fi
+
 deploy_dhis2_app() {
     echo "Downloading the release..."
 
@@ -37,7 +51,7 @@ deploy_dhis2_app() {
 
     # install dependencies, build and deploy the app
     echo "Installing dependencies..."
-    yarn install
+    yarn install --silent
 
     echo "Building the app..."
     yarn build
@@ -48,6 +62,7 @@ deploy_dhis2_app() {
     echo "Cleaning up..."
     cd ..
     rm -rf "$app_folder"
+
 }
 
 read -p "Enter the DHIS2 URL for the national instance: " dhis2_url
