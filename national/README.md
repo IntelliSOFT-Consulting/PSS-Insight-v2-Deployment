@@ -39,7 +39,7 @@ _(it may take a couple minutes for the Java server to initialize)_
 
 Once started, the services should automatically restart if Docker or the host machine are restarted.
 
-Your DHIS2 instance will be accessible at [localhost:8080](http://localhost:8080/)
+Your DHIS2 instance will be accessible at [localhost:8080](http://localhost:8080/) on the server. 
 
 Deploy the PSS v2 Web Apps. Follow the instructions [here](../README.md#2-deploy-pss-insight-v2-web-apps)
 
