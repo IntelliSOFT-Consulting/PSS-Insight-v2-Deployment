@@ -50,12 +50,27 @@ The following process will deploy the these custom web apps that are all part of
   - Ensure that you have the URL to the international instance.
 - Confirm that the following environment variables have been set correctly in the [.env](./.env) file
 
+#### .env file setup
 | Variable        | Description                                                                              |
 |-----------------|------------------------------------------------------------------------------------------|
 | SOURCE_USERNAME | URL Path to the national instance e.g.  http://pssnational.intellisoftkenya.com          |
 | SOURCE_PASSWORD | DHIS2 username: admin                                                                    |
 | SOURCE_URL      | DHIS2 Password: district                                                                 |
 | TARGET_URL      | URL Path to the international instance e.g. http://pssinternational.intellisoftkenya.com |
+| DHIS2_DATA_ENTRY_RELEASE_URL  | https://github.com/IntelliSOFT-Consulting/PSS-Insight-v2-Dataentry-Dhis2App/archive/refs/tags/V1.0.0.zip |
+| DHIS2_CONFIGURATION_RELEASE_URL | https://github.com/IntelliSOFT-Consulting/PSS-Insight-v2-National-Dhis2App/archive/refs/tags/v1.0.0.zip |
+| DHIS2_DATA_IMPORT_RELEASE_URL | https://github.com/IntelliSOFT-Consulting/PSS-Insight-v2-Data-Import/archive/refs/tags/v1.0.0.zip |
+| DHIS2_INDICATOR_SYNC_RELEASE_URL | https://github.com/IntelliSOFT-Consulting/PSS-Insight-v2-Indicator-Sync-Dhis2App/archive/refs/tags/v1.0.0.zip |
+
+> Note: 
+
+ - You have to include the `http://` or `https://` protocol in the URLs
+ - The URLs should point to the zip files of the apps. 
+ - Only add the urls for the apps you want to deploy. If you don't want to deploy an app, leave the field for that app blank.
+ - At least one app must be deployed. Failure to deploy at least one app will result in an error. 
+
+### Deploy
+
 
 ##### Run deployment script
 - cd into the scripts folder. `cd scripts/`
