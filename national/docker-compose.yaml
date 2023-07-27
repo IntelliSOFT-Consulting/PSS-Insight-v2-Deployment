@@ -9,7 +9,7 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=national_db,file_storage
+      - POSTGRES_DB=national_db
       - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
       - LANG=en_US.utf8
       - PG_MAJOR=14
@@ -40,9 +40,11 @@ services:
       - 5438:5432/tcp
     restart: always
     volumes:
-      - docker_national_db:/var/lib/postgresql/data
-      - docker_file_db:/var/lib/postgresql/data/file_db
-      - docker_national_db:/var/lib/postgresql/data/national_db
+      #- docker_national_db:/var/lib/postgresql/data
+      #- docker_file_db:/var/lib/postgresql/data/file_db
+      - postgres_data:/var/lib/postgresql/data
+      - ./db/national_db_2023.07.27.sql:/docker-entrypoint-initdb.d/national_db.sql
+
   pss_ws_national:
     container_name: pss_ws_national
     entrypoint:
@@ -192,4 +194,6 @@ volumes:
   docker_national_db:
     external: no
   docker_file_db:
+    external: no
+  postgres_data:
     external: no
