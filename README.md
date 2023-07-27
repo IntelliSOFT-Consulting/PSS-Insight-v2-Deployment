@@ -14,7 +14,7 @@ The installation process involves 2 stages:
 
 1. Deploy DHIS2
 
-2. Deploy PSS v2 WebApps
+2. Deploy PSS Insight v2 WebApps
 
 ## 1. Deploy DHIS2
 
@@ -24,7 +24,7 @@ The installation process involves 2 stages:
  - cd into the `national` folder
  - Follow the instructions detailed [here](./national/README.md)
 
-## 2. Deploy PSS v2 Web Apps
+## 2. Deploy PSS Insight v2 Web Apps
 
 The following process will deploy the these custom web apps that are all part of the PSS V2 application:
 - [PSS Insight v2 Data entry app](https://github.com/IntelliSOFT-Consulting/PSS-Insight-v2-Dataentry-Dhis2App)
