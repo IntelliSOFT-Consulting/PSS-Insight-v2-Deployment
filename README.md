@@ -1,8 +1,18 @@
 # PSS-Insight-v2-Deployment
 
-## Deployment Instructions
-
-### Pre-requisites
+## Table of contents
+<!-- TOC -->
+* [PSS-Insight-v2-Deployment](#pss-insight-v2-deployment)
+  * [Table of contents](#table-of-contents)
+  * [Pre-requisites](#pre-requisites)
+    * [Steps](#steps)
+  * [Installation steps](#installation-steps)
+    * [1. Deploy DHIS2](#1-deploy-dhis2)
+    * [2. Deploy PSS Insight v2 Web Apps](#2-deploy-pss-insight-v2-web-apps)
+      * [Pre-requisites](#pre-requisites-1)
+      * [Run deployment script](#run-deployment-script)
+<!-- TOC -->
+## Pre-requisites
 
 - OS Architecture: **linux/amd64. Preferably Ubuntu 20.04LTS and above**  
 - **Docker and Docker Compose**. Instructions for installing on an Ubuntu OS can be found here https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-22-04
@@ -10,13 +20,14 @@
 - **Yarn**: Instructions for installing Yarn can be found here https://classic.yarnpkg.com/lang/en/docs/install
 - **Unzip**: You need to have unzip installed on your system.
 
+### Steps
 The installation process involves 2 stages:
 
 1. Deploy DHIS2
 
 2. Deploy PSS Insight v2 WebApps
-
-## 1. Deploy DHIS2
+## Installation steps
+#### 1. Deploy DHIS2
 
  - Clone this repository into to your local environment 
 
@@ -24,7 +35,7 @@ The installation process involves 2 stages:
  - cd into the `national` folder
  - Follow the instructions detailed [here](./national/README.md)
 
-## 2. Deploy PSS Insight v2 Web Apps
+#### 2. Deploy PSS Insight v2 Web Apps
 
 The following process will deploy the these custom web apps that are all part of the PSS V2 application:
 - [PSS Insight v2 Data entry app](https://github.com/IntelliSOFT-Consulting/PSS-Insight-v2-Dataentry-Dhis2App)
@@ -32,7 +43,7 @@ The following process will deploy the these custom web apps that are all part of
 - [PSS Insight v2 Data Sync app](https://github.com/IntelliSOFT-Consulting/PSS-Insight-v2-Indicator-Sync-Dhis2App)
 - [PSS Insight v2 Data Import app](https://github.com/IntelliSOFT-Consulting/PSS-Insight-v2-Data-Import)
 
-#### Pre-requisites
+##### Pre-requisites
 
 - **DHIS2 Server instances**: 
   - Ensure that your national instance of DHIS2 is running. 
@@ -46,7 +57,7 @@ The following process will deploy the these custom web apps that are all part of
 | SOURCE_URL      | DHIS2 Password: district                                                                 |
 | TARGET_URL      | URL Path to the international instance e.g. http://pssinternational.intellisoftkenya.com |
 
-### Deploy
+##### Run deployment script
 - cd into the scripts folder. `cd scripts/`
 - run `sudo chmod 755 ./webapps.sh` to make the script executable
 - run `./webapps.sh` to deploy the apps to your DHIS2 instance
