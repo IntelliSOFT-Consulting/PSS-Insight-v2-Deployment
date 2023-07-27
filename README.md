@@ -52,3 +52,5 @@ The following process will deploy the these custom web apps that are all part of
 - run `./webapps.sh` to deploy the apps to your DHIS2 instance
 - Enter the required keys as prompted (You may not be prompted if the keys are found in the [.env](./.env) file)
 
+*This process will take a few minutes to complete as the apps are built and deployed*
+
