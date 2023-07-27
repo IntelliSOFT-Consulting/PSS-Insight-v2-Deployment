@@ -4,39 +4,49 @@
 
 ### Pre-requisites
 
-- OS Architecture: **linux/amd64**
-- Docker and Docker Compose should be installed on your system. Instructions for installing on an Ubuntu OS can be found here https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-22-04
+- OS Architecture: **linux/amd64. Preferably Ubuntu 20.04LTS and above**  
+- **Docker and Docker Compose**. Instructions for installing on an Ubuntu OS can be found here https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-22-04
+- **NodeJS - minimum version 14**: Instructions for installing NodeJS on an Ubuntu OS can be found here https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-22-04
+- **Yarn**: Instructions for installing Yarn can be found here https://classic.yarnpkg.com/lang/en/docs/install
+- **Unzip**: You need to have unzip installed on your system.
 
-### Step 1: Clone the Repository
+The installation process involves 2 stages:
 
-- Clone this repository into to your local environment
-- cd into the `national` folder to start the network setup
+1. Deploy DHIS2
 
-### Step 2: Deployment via Docker
+2. Deploy PSS v2 WebApps
 
-- Follow the instructions detailed [here](./national/README.md)
+## 1. Deploy DHIS2
 
-### Step 3: Deploy custom apps
+ - Clone this repository into to your local environment 
+
+```git clone https://github.com/IntelliSOFT-Consulting/PSS-Insight-v2-Deployment-national.git```
+ - cd into the `national` folder
+ - Follow the instructions detailed [here](./national/README.md)
+
+## 2. Deploy PSS v2 Web Apps
+
+The following process will deploy the these custom web apps that are all part of the PSS V2 application:
+- [PSS Insight v2 Data entry app](https://github.com/IntelliSOFT-Consulting/PSS-Insight-v2-Dataentry-Dhis2App)
+- [PSS Insight v2 Configuration app](https://github.com/IntelliSOFT-Consulting/PSS-Insight-v2-National-Dhis2App)
+- [PSS Insight v2 Data Sync app](https://github.com/IntelliSOFT-Consulting/PSS-Insight-v2-Indicator-Sync-Dhis2App)
+- [PSS Insight v2 Data Import app](https://github.com/IntelliSOFT-Consulting/PSS-Insight-v2-Data-Import)
 
 #### Pre-requisites
 
-DHIS2 Server: You need to have a running DHIS2 instance accessible over the internet.
-NodeJS: You need to have NodeJS V 14+ installed on your system. Instructions for installing NodeJS on an Ubuntu OS can be found here https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-22-04
-Yarn: You need to have Yarn installed on your system. Instructions for installing Yarn can be found here https://classic.yarnpkg.com/lang/en/docs/install
-Unzip: You need to have unzip installed on your system.
+- **DHIS2 Server instance**: Ensure that your instance of DHIS2 is running. Also ensure that you have the URL to the international instance.
+- Confirm that the following environment variables have been set correctly in the [.env](./.env) file
 
-#### Required keys
-
-| Field                                                | Description                                               | Example                                       |
-| ---------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------- |
-| Enter the DHIS2 URL for the national instance        | The URL of the DHIS2 instance you're deploying the app to | http://pssnational2.intellisoftkenya.com      |
-| Enter your DHIS2 username for the national instance  | The username of the DHIS2 instance                        | admin                                         |
-| Enter your DHIS2 password for the national instance  | The password of the DHIS2 instance                        | district                                      |
-| Enter the backend URL for the international instance | The URL of the backend of international instance          | https://pss-insight-backend-international.com |
+| Variable        | Description                                                                              |
+|-----------------|------------------------------------------------------------------------------------------|
+| SOURCE_USERNAME | URL Path to the national instance e.g.  http://pssnational.intellisoftkenya.com          |
+| SOURCE_PASSWORD | DHIS2 username: admin                                                                    |
+| SOURCE_URL      | DHIS2 Password: district                                                                 |
+| TARGET_URL      | URL Path to the international instance e.g. http://pssinternational.intellisoftkenya.com |
 
 ### Deploy
+- Ensure that you are inside the `national` folder
+- run `sudo chmod 755 ./scripts/webapps.sh` to make the script executable
+- run `./scripts/webapps.sh` to deploy the apps to your DHIS2 instance
+- Enter the required keys as prompted (You may not be prompted if the keys are found in the [.env](./.env) file)
 
-- cd into the `national/scripts/` folder
-- run `sudo chmod 755 ./webapps.sh` to make the script executable
-- run `./webapps.sh` to deploy the apps to your DHIS2 instance
-- Enter the required keys as prompted. (You may not be prompted if the keys are found in the `.env` file)
