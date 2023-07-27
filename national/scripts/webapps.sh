@@ -1,43 +1,55 @@
 #!/bin/bash
 
 if ! command -v node &>/dev/null; then
+    tput setaf 1
     echo "nodejs is not installed. Please install nodejs before running this script."
     exit 1
 fi
 
 if ! command -v yarn &>/dev/null; then
+    tput setaf 1
     echo "yarn is not installed. Please install yarn before running this script."
     exit 1
 fi
 
 if ! command -v git &>/dev/null; then
+    tput setaf 1
     echo "git is not installed. Please install git before running this script."
     exit 1
 fi
 
 if ! command -v unzip &>/dev/null; then
+    tput setaf 1
     echo "unzip is not installed. Please install unzip before running this script."
     exit 1
 fi
-
 
 node_version=$(node -v)
 if [[ $node_version =~ ^v([0-9]+)\. ]]; then
     node_major_version="${BASH_REMATCH[1]}"
     if [[ $node_major_version -lt 14 ]]; then
+        tput setaf 1
         echo "node version must be >= 14. Please update node before running this script."
         exit 1
     fi
 fi
 
-# check if you are currently in scripts folder 
+# check if you are currently in scripts folder
 if [[ ! $(pwd) =~ scripts$ ]]; then
+    tput setaf 1
     echo "Please cd into the scripts folder to run this script."
     exit 1
 fi
 
 deploy_dhis2_app() {
     echo "Downloading the release..."
+
+    # check if the release is a zip file
+    if [[ ! $1 =~ \.zip$ ]]; then
+        tput setaf 1
+        echo "The release must be a zip file. Please check the release URL and try again."
+        exit 1
+    fi
 
     # download the release zip file
     curl -L -o app.zip "$1"
@@ -81,6 +93,11 @@ username=""
 password=""
 dhis2_intl_url=""
 
+data_entry_app_release=""
+config_app_release=""
+data_import_app_release=""
+indicator_sync_app_release=""
+
 while IFS= read -r line; do
     if [[ $line =~ ^SOURCE_URL=(.*)$ ]]; then
         dhis2_url="${BASH_REMATCH[1]%/api/*}"
@@ -90,6 +107,14 @@ while IFS= read -r line; do
         password="${BASH_REMATCH[1]}"
     elif [[ $line =~ ^TARGET_URL=(.*)$ ]]; then
         dhis2_intl_url="${BASH_REMATCH[1]%/api/*}"
+    elif [[ $line =~ ^DHIS2_DATA_ENTRY_RELEASE_URL=(.*)$ ]]; then
+        data_entry_app_release="${BASH_REMATCH[1]}"
+    elif [[ $line =~ ^DHIS2_CONFIG_RELEASE_URL=(.*)$ ]]; then
+        config_app_release="${BASH_REMATCH[1]}"
+    elif [[ $line =~ ^DHIS2_DATA_IMPORT_RELEASE_URL=(.*)$ ]]; then
+        data_import_app_release="${BASH_REMATCH[1]}"
+    elif [[ $line =~ ^DHIS2_INDICATOR_SYNC_RELEASE_URL=(.*)$ ]]; then
+        indicator_sync_app_release="${BASH_REMATCH[1]}"
     fi
 done <../.env
 
@@ -97,6 +122,7 @@ done <../.env
 if [[ -z $dhis2_url ]]; then
     read -p "Enter the DHIS2 URL for the national instance: " dhis2_url
     if [[ ! $dhis2_url =~ ^https?:// ]]; then
+        tput setaf 1
         echo "Invalid URL. Please enter a valid URL."
         exit 1
     fi
@@ -106,6 +132,7 @@ fi
 if [[ -z $username ]]; then
     read -p "Enter your DHIS2 username for the national instance: " username
     if [[ -z $username ]]; then
+        tput setaf 1
         echo "Username cannot be empty. Please enter a valid username."
         exit 1
     fi
@@ -116,6 +143,7 @@ if [[ -z $password ]]; then
 
     read -s -p "Enter your DHIS2 password for the national instance: " password
     if [[ -z $password ]]; then
+        tput setaf 1
         echo "Password cannot be empty. Please enter a valid password."
         exit 1
     fi
@@ -126,31 +154,49 @@ if [[ -z $dhis2_intl_url ]]; then
     echo ""
     read -p "Enter the DHIS2 URL for the international instance: " dhis2_intl_url
     if [[ ! $dhis2_intl_url =~ ^https?:// ]]; then
+        tput setaf 1
         echo "Invalid URL. Please enter a valid URL."
         exit 1
     fi
 fi
 
-# Data entry app
-data_entry_app_repo="https://github.com/IntelliSOFT-Consulting/PSS-Insight-v2-Dataentry-Dhis2App/archive/refs/tags/V1.0.0.zip"
-echo "Deploying Data Entry app..."
+# check if the credentials are correct
+echo ""
+echo "Checking credentials..."
+response=$(curl -s -o /dev/null -w "%{http_code}" "$dhis2_url/api/me" --user "$username:$password")
+if [[ $response -ne 200 ]]; then
+    tput setaf 1
+    echo "Invalid credentials. Please check your credentials and try again."
+    exit 1
+fi
 
-deploy_dhis2_app "$data_entry_app_repo"
+# if all releases do not have a value, throw an error and exit
+if [[ -z $data_entry_app_release && -z $config_app_release && -z $data_import_app_release && -z $indicator_sync_app_release ]]; then
+    tput setaf 1
+    echo "Please set the release URLs for the apps in the .env file."
+    exit 1
+fi
 
-# Configuration app
-config_app_repo="https://github.com/IntelliSOFT-Consulting/PSS-Insight-v2-National-Dhis2App/archive/refs/tags/v1.0.0.zip"
-echo "Deploying Configuration app..."
+# only deploy the apps that have a release URL
+if [[ ! -z $data_entry_app_release ]]; then
+    echo "Deploying Data Entry app..."
+    deploy_dhis2_app "$data_entry_app_release"
+fi
 
-deploy_dhis2_app "$config_app_repo"
+if [[ ! -z $config_app_release ]]; then
+    echo "Deploying Configuration app..."
+    deploy_dhis2_app "$config_app_release"
+fi
 
-# Data import app
-data_import_app_repo="https://github.com/IntelliSOFT-Consulting/PSS-Insight-v2-Data-Import/archive/refs/tags/v1.0.0.zip"
-echo "Deploying Data Import app..."
-deploy_dhis2_app "$data_import_app_repo"
+if [[ ! -z $data_import_app_release ]]; then
+    echo "Deploying Data Import app..."
+    deploy_dhis2_app "$data_import_app_release"
+fi
 
-# Indicator Sync app
-indicator_sync_app_repo="https://github.com/IntelliSOFT-Consulting/PSS-Insight-v2-Indicator-Sync-Dhis2App/archive/refs/tags/v1.0.0.zip"
-echo "Deploying Indicator Sync app..."
-deploy_dhis2_app "$indicator_sync_app_repo"
+if [[ ! -z $indicator_sync_app_release ]]; then
+    echo "Deploying Indicator Sync app..."
+    deploy_dhis2_app "$indicator_sync_app_release"
+fi
 
-echo "All apps deployed successfully!"
+tput setaf 2
+echo "✨ All apps deployed successfully!"

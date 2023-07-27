@@ -34,6 +34,26 @@ Unzip: You need to have unzip installed on your system.
 | Enter your DHIS2 password for the national instance  | The password of the DHIS2 instance                        | district                                      |
 | Enter the backend URL for the international instance | The URL of the backend of international instance          | https://pss-insight-backend-international.com |
 
+#### .env file setup
+| Field                                                | Description                                               | Example                                       |
+| ---------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------- |
+| SOURCE_URL                                           | The URL of the DHIS2 instance you're deploying the app to | http://pssnational2.intellisoftkenya.com/api/events     |
+| SOURCE_USERNAME                                      | The username of the DHIS2 instance                        | admin                                         |
+| SOURCE_PASSWORD                                      | The password of the DHIS2 instance                        | district                                      |
+| TARGET_URL                                           | The URL of the backend of international instance          | https://pss-insight-backend-international.com/api/events |
+| DHIS2_DATA_ENTRY_RELEASE_URL                         | The URL to the release of the DHIS2 data entry app (zip)  | https://github.com/IntelliSOFT-Consulting/PSS-Insight-v2-Dataentry-Dhis2App/archive/refs/tags/V1.0.0.zip |
+| DHIS2_CONFIGURATION_RELEASE_URL                     | The URL to the release of the DHIS2 configuration app (zip)| https://github.com/IntelliSOFT-Consulting/PSS-Insight-v2-National-Dhis2App/archive/refs/tags/v1.0.0.zip |
+| DHIS2_DATA_IMPORT_RELEASE_URL                          | The URL to the release of the DHIS2 data import app (zip)  | https://github.com/IntelliSOFT-Consulting/PSS-Insight-v2-Data-Import/archive/refs/tags/v1.0.0.zip |
+| DHIS2_INDICATOR_SYNC_RELEASE_URL                       | The URL to the release of the DHIS2 indicator sync app (zip)  | https://github.com/IntelliSOFT-Consulting/PSS-Insight-v2-Indicator-Sync-Dhis2App/archive/refs/tags/v1.0.0.zip |
+
+
+> Note: 
+
+ - You have to include the `http://` or `https://` protocol in the URLs
+ - The URLs should point to the zip files of the apps. 
+ - Only add the urls for the apps you want to deploy. If you don't want to deploy an app, leave the field for that app blank.
+ - At least one app must be deployed. Failure to deploy at least one app will result in an error. 
+
 ### Deploy
 
 - cd into the `national/scripts/` folder
