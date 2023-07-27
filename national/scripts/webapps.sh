@@ -74,7 +74,7 @@ deploy_dhis2_app() {
 
     # install dependencies, build and deploy the app
     echo "Installing dependencies..."
-    yarn install --silent
+    yarn install 2> >(grep -v warning 1>&2)
 
     echo "Building the app..."
     yarn build
