@@ -34,7 +34,9 @@ The following process will deploy the these custom web apps that are all part of
 
 #### Pre-requisites
 
-- **DHIS2 Server instance**: Ensure that your instance of DHIS2 is running. Also ensure that you have the URL to the international instance.
+- **DHIS2 Server instances**: 
+  - Ensure that your national instance of DHIS2 is running. 
+  - Ensure that you have the URL to the international instance.
 - Confirm that the following environment variables have been set correctly in the [.env](./.env) file
 
 | Variable        | Description                                                                              |
@@ -45,8 +47,8 @@ The following process will deploy the these custom web apps that are all part of
 | TARGET_URL      | URL Path to the international instance e.g. http://pssinternational.intellisoftkenya.com |
 
 ### Deploy
-- Ensure that you are inside the `national` folder
-- run `sudo chmod 755 ./scripts/webapps.sh` to make the script executable
-- run `./scripts/webapps.sh` to deploy the apps to your DHIS2 instance
+- cd into the scripts folder. `cd scripts/`
+- run `sudo chmod 755 ./webapps.sh` to make the script executable
+- run `./webapps.sh` to deploy the apps to your DHIS2 instance
 - Enter the required keys as prompted (You may not be prompted if the keys are found in the [.env](./.env) file)
 
