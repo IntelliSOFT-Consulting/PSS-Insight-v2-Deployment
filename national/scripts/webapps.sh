@@ -99,6 +99,10 @@ data_import_app_release=""
 indicator_sync_app_release=""
 
 while IFS= read -r line; do
+    # skip comments
+    if [[ $line =~ ^# ]]; then
+        continue
+    fi
     if [[ $line =~ ^SOURCE_URL=(.*)$ ]]; then
         dhis2_url="${BASH_REMATCH[1]%/api/*}"
     elif [[ $line =~ ^SOURCE_USERNAME=(.*)$ ]]; then
