@@ -104,6 +104,8 @@ services:
       options: {}
     mac_address: 02:42:ac:11:00:03
     network_mode: bridge
+    networks:
+      - docker_default
     ports:
       - 8000:8000/tcp
     working_dir: /app
@@ -134,6 +136,8 @@ services:
       options: {}
     mac_address: 02:42:ac:11:00:04
     network_mode: bridge
+    networks:
+      - docker_default
     ports:
       - 3000:3000/tcp
   core:
@@ -149,6 +153,8 @@ services:
       DHIS2_HOME: ${DHIS2_HOME:-/DHIS2_home}
       CATALINA_OPTS: "-Dcontext.path='${DHIS2_CORE_CONTEXT_PATH:-}' \
               -Dlog4j2.configurationFile=${DHIS2_HOME:-/DHIS2_home}/log4j2.xml"
+    networks:
+      - docker_default
     depends_on:
       - "db"
   db:
@@ -162,6 +168,8 @@ services:
       POSTGRES_DB: dhis2
       POSTGRES_USER: dhis
       POSTGRES_PASSWORD: dhis
+    networks:
+      - docker_default
   gateway:
     image: "jwilder/nginx-proxy:alpine"
     container_name: gateway
@@ -172,6 +180,8 @@ services:
       - ./config/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./.apps:/data/apps:ro
       - /var/run/docker.sock:/tmp/docker.sock:ro
+    networks:
+      - docker_default
 networks:
   docker_default:
     external: no
