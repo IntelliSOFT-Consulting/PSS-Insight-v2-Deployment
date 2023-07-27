@@ -4,16 +4,17 @@
 
 ### Pre-requisites
 
-- OS Architecture: **linux/amd64**  
+- OS Architecture: **linux/amd64**
 - Docker and Docker Compose should be installed on your system. Instructions for installing on an Ubuntu OS can be found here https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-22-04
 
 ### Step 1: Clone the Repository
 
- - Clone this repository into to your local environment
- - cd into the `national` folder to start the network setup
+- Clone this repository into to your local environment
+- cd into the `national` folder to start the network setup
 
 ### Step 2: Deployment via Docker
- - Follow the instructions detailed [here](./national/README.md)
+
+- Follow the instructions detailed [here](./national/README.md)
 
 ### Step 3: Deploy custom apps
 
@@ -25,16 +26,17 @@ Yarn: You need to have Yarn installed on your system. Instructions for installin
 Unzip: You need to have unzip installed on your system.
 
 #### Required keys
-| Field | Description | Example |
-| --- | --- | --- |
-| Enter the DHIS2 URL for the national instance | The URL of the DHIS2 instance you're deploying the app to | http://pssnational2.intellisoftkenya.com|
-| Enter your DHIS2 username for the national instance | The username of the DHIS2 instance | admin |
-| Enter your DHIS2 password for the national instance | The password of the DHIS2 instance | district |
-| Enter the backend URL for the international instance | The URL of the backend of international instance | https://pss-insight-backend-international.com |
+
+| Field                                                | Description                                               | Example                                       |
+| ---------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------- |
+| Enter the DHIS2 URL for the national instance        | The URL of the DHIS2 instance you're deploying the app to | http://pssnational2.intellisoftkenya.com      |
+| Enter your DHIS2 username for the national instance  | The username of the DHIS2 instance                        | admin                                         |
+| Enter your DHIS2 password for the national instance  | The password of the DHIS2 instance                        | district                                      |
+| Enter the backend URL for the international instance | The URL of the backend of international instance          | https://pss-insight-backend-international.com |
 
 ### Deploy
-- cd into the `national` folder
+
+- cd into the `national/scripts/` folder
 - run `sudo chmod 755 ./webapps.sh` to make the script executable
 - run `./webapps.sh` to deploy the apps to your DHIS2 instance
-- Enter the required keys as prompted
-
+- Enter the required keys as prompted. (You may not be prompted if the keys are found in the `.env` file)
