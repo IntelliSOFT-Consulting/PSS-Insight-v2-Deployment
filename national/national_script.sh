@@ -124,7 +124,6 @@ while [ $HTTP_RESPONSE -ne 200 ] && [ $HTTP_RESPONSE -ne 302 ]; do
     HTTP_RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" $DHIS2_URL)
 done
 
-
 echo "DHIS2 core server is running."
 
 echo "Installing DHIS2 apps..."
