@@ -114,9 +114,14 @@ while IFS= read -r line; do
     fi
 done <./.env
 
-while [[ $(curl -v http://localhost:$dhis2_port>&1) != *"Connected to localhost"* ]]; do
+DHIS2_URL="http://localhost:$dhis2_port"
+HTTP_RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" $DHIS2_URL)
+
+# Check the HTTP response code
+while [ $HTTP_RESPONSE -ne 200 ] && [ $HTTP_RESPONSE -ne 302 ]; do
     echo "DHIS2 core server is not running. Waiting for 10 seconds..."
     sleep 10
+    HTTP_RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" $DHIS2_URL)
 done
 
 echo "DHIS2 core server is running."
