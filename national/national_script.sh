@@ -100,4 +100,28 @@ sleep 10
 echo "Running containers:"
 docker ps
 
+
+# check if the DHIS2 core server is running before proceeding
+echo "Checking if the DHIS2 core server is running..."
+
+while IFS= read -r line; do
+    # skip comments
+    if [[ $line =~ ^# ]]; then
+        continue
+    fi
+    if [[ $line =~ ^DHIS2_CORE_PORT=(.*)$ ]]; then
+        dhis2_port="${BASH_REMATCH[1]}"
+    fi
+done <./.env
+
+while [[ $(curl -v http://localhost:$dhis2_port>&1) != *"Connected to localhost"* ]]; do
+    echo "DHIS2 core server is not running. Waiting for 10 seconds..."
+    sleep 10
+done
+
+echo "DHIS2 core server is running."
+
+echo "Installing DHIS2 apps..."
+cd scripts && ./webapps.sh
+
 echo "Deployment completed successfully!"
