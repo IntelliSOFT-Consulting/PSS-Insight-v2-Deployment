@@ -126,6 +126,10 @@ done
 
 echo "DHIS2 core server is running."
 
+echo "Seed DHIS2 database..."
+
+./scripts/seed.sh db/*.gz
+
 echo "Installing DHIS2 apps..."
 cd scripts && ./webapps.sh
 
