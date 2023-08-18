@@ -41,7 +41,9 @@ The steps are outlined below:
    ```
      cd PSS-Insight-v2-Deployment-national/national
    ```
-3. Make the installation script executable
+3. Countercheck the environment variables have been set correctly. They can be found here on the [.env](./.env) file. (Refer to the advanced installation steps on the next section for details about the environment variables)
+
+4. Make the installation script executable
    ```
      sudo chmod 755 ./national_script.sh
    ```
