@@ -12,6 +12,16 @@ function check_command() {
 check_command docker
 check_command docker-compose
 
+node_version=$(node -v)
+if [[ $node_version =~ ^v([0-9]+)\. ]]; then
+    node_major_version="${BASH_REMATCH[1]}"
+    if [[ $node_major_version -lt 16 ]]; then
+        tput setaf 1
+        echo "node version must be >= 16. Please update node before running this script."
+        exit 1
+    fi
+fi
+
 # Set environment variables for d2-cluster-2380-core-1
 CORE_DB_CONTAINER="d2-cluster-2380-db-1"
 CORE_DOCKER_IMAGE="dhis2/core:2.38.0"
