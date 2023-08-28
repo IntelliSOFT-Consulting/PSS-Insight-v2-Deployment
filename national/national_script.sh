@@ -136,19 +136,16 @@ done
 
 echo "DHIS2 core server is running."
 
-echo "Adding custom CSS..."
-
-curl -o ./scripts/style.css https://raw.githubusercontent.com/IntelliSOFT-Consulting/PSS-DHIS2-login/main/style.css
-
-curl -X POST -H "Content-Type: text/css" -d @./scripts/style.css "$DHIS2_URL/api/38/files/style"
-
-rm ./scripts/style.css
-
-echo "Seed DHIS2 database..."
-
-./scripts/seed.sh db/*.gz
-
+set -e
 echo "Installing DHIS2 apps..."
 cd scripts && ./webapps.sh
+
+echo "Seed DHIS2 database..."
+./scripts/seed.sh db/*.gz
+
+echo "Adding custom CSS..."
+curl -o ./scripts/style.css https://raw.githubusercontent.com/IntelliSOFT-Consulting/PSS-DHIS2-login/main/style.css
+curl -X POST -H "Content-Type: text/css" -d @./scripts/style.css "$DHIS2_URL/api/38/files/style"
+rm ./scripts/style.css
 
 echo "Deployment completed successfully!"
