@@ -138,7 +138,7 @@ echo "DHIS2 core server is running."
 
 set -e
 echo "Installing DHIS2 apps..."
-cd scripts && ./webapps.sh
+./webapps.sh
 
 echo "Seed DHIS2 database..."
 ./scripts/seed.sh db/*.gz

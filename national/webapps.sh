@@ -48,11 +48,11 @@ if [[ $node_version =~ ^v([0-9]+)\. ]]; then
 fi
 
 # check if you are currently in scripts folder
-if [[ ! $(pwd) =~ scripts$ ]]; then
-    tput setaf 1
-    echo "Please cd into the scripts folder to run this script."
-    exit 1
-fi
+# if [[ ! $(pwd) =~ scripts$ ]]; then
+#     tput setaf 1
+#     echo "Please cd into the scripts folder to run this script."
+#     exit 1
+# fi
 
 deploy_dhis2_app() {
     echo "Downloading the release..."
@@ -133,7 +133,7 @@ while IFS= read -r line; do
     elif [[ $line =~ ^DHIS2_INDICATOR_SYNC_RELEASE_URL=(.*)$ ]]; then
         indicator_sync_app_release="${BASH_REMATCH[1]}"
     fi
-done <../.env
+done <./.env
 
 # ask for the DHIS2 URL if it is not set in the .env file
 if [[ -z $dhis2_url ]]; then
