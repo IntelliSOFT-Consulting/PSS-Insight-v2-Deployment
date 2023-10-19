@@ -25,6 +25,8 @@ Docker-compose: https://www.digitalocean.com/community/tutorials/how-to-install-
 - **NodeJS - minimum version 14**: Instructions for installing NodeJS on an Ubuntu OS can be found here https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-22-04
 - **Yarn**: Instructions for installing Yarn can be found here https://classic.yarnpkg.com/lang/en/docs/install
 - **Unzip**: You need to have unzip installed on your system. `sudo apt install unzip`
+- **Git**: You need to have git installed on your system. `sudo apt install git`
+
 
 ## Basic Installation Steps
 
