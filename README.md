@@ -21,14 +21,12 @@
 - OS Architecture: **linux/amd64. Preferably Ubuntu 20.04LTS and above**
 - **Docker and Docker Compose**. Instructions for installing on an Ubuntu OS can be found here: 
 Docker: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-22-04
-Docker-compose: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-22-04. If installing docker-compose for the first time on your server, ensure that it has been registered on the system application directory `/usr/bin/` otherwise, you will run into this error `docker-compose: command not found` if you run docker-compose via `sudo`.
-
-`sudo ln -s ~/.docker/cli-plugin/docker-compose /usr/bin/docker-compose`
+Docker-compose (v2): https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-22-04. 
 
 - **NodeJS - minimum version 14**: Instructions for installing NodeJS on an Ubuntu OS can be found here https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-22-04
 - **Yarn**: Instructions for installing Yarn can be found here https://classic.yarnpkg.com/lang/en/docs/install
 - **Unzip**: You need to have unzip installed on your system. `sudo apt install unzip`
-- **Git**: Ensure that git installed on your system by running `git -v`. If not installed, install it by running `sudo apt install git`
+- **Git**: Ensure git is installed on your system by running `git -v`. If not installed, install it by running `sudo apt install git`
 
 
 ## Basic Installation Steps
@@ -48,7 +46,7 @@ The steps are outlined below:
    ```
      cd PSS-Insight-v2-Deployment-national/national
    ```
-3. Countercheck the environment variables have been set correctly. They can be found here on the [.env](./.env) file. (Refer to the advanced installation steps on the next section for details about the environment variables)
+3. Countercheck the environment variables have been set correctly. They can be found here on the [.env](./.env) file. (Refer to the advanced installation steps in the next section for details about the environment variables.)
 
 4. Make the installation script executable
    ```
@@ -56,12 +54,12 @@ The steps are outlined below:
    ```
 4. Run the installation script
    ```
-     ./national_script.sh
+     sudo ./national_script.sh
    ```
 
 *The process will run for a few minutes.*
 
-Once the process concludes, the application will accessible via the [http://localhost:8080](http://localhost:8080/) link
+Once the process concludes, the application will be accessible via the [http://localhost:8080](http://localhost:8080/) link
 
 ## Advanced Installation steps
 
@@ -74,7 +72,7 @@ The installation process involves 2 stages:
 
 #### 1. Deploy DHIS2
 
-- Clone this repository into to your local environment
+- Clone this repository into your local environment
 
 ``git clone https://github.com/IntelliSOFT-Consulting/PSS-Insight-v2-Deployment-national.git``
 
@@ -83,7 +81,7 @@ The installation process involves 2 stages:
 
 #### 2. Deploy PSS Insight v2 Web Apps
 
-The following process will deploy the these custom web apps that are all part of the PSS V2 application:
+The following process will deploy these custom web apps that are all part of the PSS V2 application:
 
 - [PSS Insight v2 Data entry app](https://github.com/IntelliSOFT-Consulting/PSS-Insight-v2-Dataentry-Dhis2App)
 - [PSS Insight v2 Configuration app](https://github.com/IntelliSOFT-Consulting/PSS-Insight-v2-National-Dhis2App)
@@ -101,10 +99,10 @@ The following process will deploy the these custom web apps that are all part of
 
 | Variable                         | Description                                                                                                   |
 | -------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| SOURCE_USERNAME                  | URL Path to the national instance e.g.  http://pssnational.intellisoftkenya.com                               |
+| SOURCE_USERNAME                  | URL Path to the national instance, e.g.  http://pssnational.intellisoftkenya.com                               |
 | SOURCE_PASSWORD                  | DHIS2 username: admin                                                                                         |
 | SOURCE_URL                       | DHIS2 Password: district                                                                                      |
-| TARGET_URL                       | URL Path to the international instance e.g. http://pssinternational.intellisoftkenya.com                      |
+| TARGET_URL                       | URL Path to the international instance, e.g. http://pssinternational.intellisoftkenya.com                      |
 | DHIS2_DATA_ENTRY_RELEASE_URL     | https://github.com/IntelliSOFT-Consulting/PSS-Insight-v2-Dataentry-Dhis2App/archive/refs/tags/V1.0.0.zip      |
 | DHIS2_CONFIGURATION_RELEASE_URL  | https://github.com/IntelliSOFT-Consulting/PSS-Insight-v2-National-Dhis2App/archive/refs/tags/v1.0.0.zip       |
 | DHIS2_DATA_IMPORT_RELEASE_URL    | https://github.com/IntelliSOFT-Consulting/PSS-Insight-v2-Data-Import/archive/refs/tags/v1.0.0.zip             |
@@ -123,7 +121,7 @@ The following process will deploy the these custom web apps that are all part of
 
 - cd into the scripts folder. `cd scripts/`
 - run `sudo chmod 755 ./webapps.sh` to make the script executable
-- run `./webapps.sh` to deploy the apps to your DHIS2 instance
-- Enter the required keys as prompted (You may not be prompted if the keys are found in the [.env](./national/.env) file)
+- run `sudo ./webapps.sh` to deploy the apps to your DHIS2 instance
+- Enter the required keys as prompted. (You may not be prompted if the keys are found in the [.env](./national/.env) file)
 
-*This process will take a few minutes to complete as the apps are built and deployed*
+*This process will take a few minutes to complete as the apps are built and deployed.*
