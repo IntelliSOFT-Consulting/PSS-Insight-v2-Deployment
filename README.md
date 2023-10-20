@@ -64,6 +64,12 @@ Once the process concludes, the application will be accessible via the [http://l
 
 ## Advanced Installation steps
 
+    This is an alternative installation process that allows you to install the PSS Insight v2 
+    components one by one as you update the system parameters.
+    
+    System parameters are environment variables in the [.env](./national/.env) file. 
+    Below is a description of the various environment variables:
+
 The installation process involves 2 stages:
 
 1. Deploy DHIS2
