@@ -7,7 +7,7 @@ dbName=dhis2
 dbUser=dhis
 dbPass=dhis
 
-[[ -z "$DOCKER_COMPOSE" ]] && DOCKER_COMPOSE="docker-compose"
+[[ -z "$DOCKER_COMPOSE" ]] && DOCKER_COMPOSE="docker compose"
 
 if [ $# -eq 0 ]
   then
