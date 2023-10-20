@@ -21,7 +21,10 @@
 - OS Architecture: **linux/amd64. Preferably Ubuntu 20.04LTS and above**
 - **Docker and Docker Compose**. Instructions for installing on an Ubuntu OS can be found here: 
 Docker: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-22-04
-Docker-compose: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-22-04
+Docker-compose: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-22-04. If installing docker-compose for the first time on your server, ensure that it has been registered on the system application directory `/usr/bin/` otherwise, you will run into this error `docker-compose: command not found` if you run docker-compose via `sudo`.
+
+`sudo ln -s ~/.docker/cli-plugin/docker-compose /usr/bin/docker-compose`
+
 - **NodeJS - minimum version 14**: Instructions for installing NodeJS on an Ubuntu OS can be found here https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-22-04
 - **Yarn**: Instructions for installing Yarn can be found here https://classic.yarnpkg.com/lang/en/docs/install
 - **Unzip**: You need to have unzip installed on your system. `sudo apt install unzip`
