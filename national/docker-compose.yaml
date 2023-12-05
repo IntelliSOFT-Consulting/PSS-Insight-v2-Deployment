@@ -57,7 +57,7 @@ services:
       - LANG=C.UTF-8
       - JAVA_VERSION=11.0.16
     hostname: a2598f7830a6
-    image: intellisoftdev/dhis_pss_national:v1
+    image: intellisoftdev/pss_ws_national:latest
     build:
       context: .
       dockerfile: Dockerfile-dhis_pss_national
@@ -66,7 +66,7 @@ services:
       driver: json-file
       options: {}
     mac_address: 02:42:ac:11:00:02
-    network_mode: bridge
+    # network_mode: bridge
     ports:
       - 7001:7001/tcp
     working_dir: /national_javabackend
@@ -105,7 +105,7 @@ services:
       driver: json-file
       options: {}
     mac_address: 02:42:ac:11:00:03
-    network_mode: bridge
+    # network_mode: bridge
     networks:
       - docker_default
     ports:
@@ -124,7 +124,7 @@ services:
       - NGINX_VERSION=1.25.1
       - PKG_RELEASE=1
       - NJS_VERSION=0.7.12
-      - REACT_APP_API_URL=https://pssnational2.intellisoftkenya.com
+      - REACT_APP_API_URL=https://local.pssinsight.org
     hostname: 9ce9118d34a9
     image: intellisoftdev/pss-survey
     build:
@@ -137,7 +137,7 @@ services:
       driver: json-file
       options: {}
     mac_address: 02:42:ac:11:00:04
-    network_mode: bridge
+    # network_mode: bridge
     networks:
       - docker_default
     ports:
@@ -186,14 +186,14 @@ services:
       - docker_default
 networks:
   docker_default:
-    external: no
+    external: false
     name: docker_default
 volumes:
   datadb:
   home:
   docker_national_db:
-    external: no
+    external: false
   docker_file_db:
-    external: no
+    external: false
   postgres_data:
-    external: no
+    external: false

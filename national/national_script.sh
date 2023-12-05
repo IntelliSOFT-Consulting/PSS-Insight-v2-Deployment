@@ -10,7 +10,7 @@ function check_command() {
 
 # Check if required commands are available
 check_command docker
-check_command docker-compose
+check_command docker compose
 
 # Set environment variables for d2-cluster-2380-core-1
 CORE_DB_CONTAINER="d2-cluster-2380-db-1"
@@ -89,8 +89,8 @@ PKG_RELEASE="1"
 NJS_VERSION="0.7.12"
 
 # Start the services using docker-compose
-echo "Starting services using docker-compose..."
-docker-compose up -d
+echo "Starting services using docker compose..."
+docker compose up -d
 
 # Wait for a while to allow containers to fully start
 echo "Waiting for containers to start..."
