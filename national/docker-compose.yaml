@@ -72,6 +72,10 @@ services:
     working_dir: /national_javabackend
     depends_on:
       - pss_ws_national_db
+    deploy:
+      resources:
+        limits:
+          memory: 4g
     networks:
       - docker_default
   pss_data_synchronization:
