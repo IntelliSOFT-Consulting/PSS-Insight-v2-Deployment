@@ -1,46 +1,5 @@
 #!/bin/bash
 
-if ! command -v node &>/dev/null; then
-    tput setaf 1
-    echo "nodejs is not installed. Please install nodejs before running this script."
-    exit 1
-fi
-
-if ! command -v yarn &>/dev/null; then
-    tput setaf 1
-    echo "yarn is not installed. Please install yarn before running this script."
-    exit 1
-fi
-
-if ! command -v git &>/dev/null; then
-    tput setaf 1
-    echo "git is not installed. Please install git before running this script."
-    exit 1
-fi
-
-if ! command -v unzip &>/dev/null; then
-    tput setaf 1
-    echo "unzip is not installed. Please install unzip before running this script."
-    exit 1
-fi
-
-node_version=$(node -v)
-if [[ $node_version =~ ^v([0-9]+)\. ]]; then
-    node_major_version="${BASH_REMATCH[1]}"
-    if [[ $node_major_version -lt 14 ]]; then
-        tput setaf 1
-        echo "node version must be >= 14. Please update node before running this script."
-        exit 1
-    fi
-fi
-
-# check if you are currently in scripts folder
-if [[ ! $(pwd) =~ scripts$ ]]; then
-    tput setaf 1
-    echo "Please cd into the scripts folder to run this script."
-    exit 1
-fi
-
 deploy_dhis2_app() {
     echo "Downloading the release..."
 
@@ -120,7 +79,7 @@ while IFS= read -r line; do
     elif [[ $line =~ ^DHIS2_INDICATOR_SYNC_RELEASE_URL=(.*)$ ]]; then
         indicator_sync_app_release="${BASH_REMATCH[1]}"
     fi
-done <../.env
+done <./.env
 
 # ask for the DHIS2 URL if it is not set in the .env file
 if [[ -z $dhis2_url ]]; then
@@ -166,7 +125,7 @@ fi
 
 # check if the credentials are correct
 echo ""
-echo "Checking credentials..."
+echo "Checking credentials for $dhis2_url/api/me ..."
 response=$(curl -s -o /dev/null -w "%{http_code}" "$dhis2_url/api/me" --user "$username:$password")
 if [[ $response -ne 200 ]]; then
     tput setaf 1
