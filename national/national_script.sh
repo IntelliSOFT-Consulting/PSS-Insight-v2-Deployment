@@ -139,6 +139,6 @@ echo "Seed DHIS2 database..."
 ./scripts/seed.sh db/*.gz
 
 echo "Installing DHIS2 apps..."
-cd scripts && ./webapps.sh
+./scripts/install_apps.sh
 
 echo "Deployment completed successfully!"
