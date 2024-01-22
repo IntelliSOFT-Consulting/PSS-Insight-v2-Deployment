@@ -88,6 +88,10 @@ NGINX_VERSION="1.25.1"
 PKG_RELEASE="1"
 NJS_VERSION="0.7.12"
 
+echo "Seed DHIS2 database..."
+
+./scripts/seed.sh db/*.gz
+
 # Start the services using docker-compose
 echo "Starting services using docker compose..."
 docker compose up -d
@@ -134,9 +138,9 @@ curl -X POST -H "Content-Type: text/css" -d @./scripts/style.css "$DHIS2_URL/api
 
 rm ./scripts/style.css
 
-echo "Seed DHIS2 database..."
+#echo "Seed DHIS2 database..."
 
-./scripts/seed.sh db/*.gz
+#./scripts/seed.sh db/*.gz
 
 echo "Installing DHIS2 apps..."
 ./scripts/install_apps.sh
