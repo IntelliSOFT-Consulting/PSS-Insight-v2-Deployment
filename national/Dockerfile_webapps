@@ -10,8 +10,9 @@ COPY ./.env /app
 
 RUN chmod +x /app/webapps.sh
 
-RUN /app/webapps.sh
+#RUN /app/webapps.sh
 
+ENTRYPOINT ["/app/webapps.sh"]
 
-CMD ["exit", "0"]
+#CMD ["exit", "0"]
 
