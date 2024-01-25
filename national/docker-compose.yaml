@@ -78,6 +78,7 @@ services:
           memory: 4g
     networks:
       - docker_default
+    restart: always
   pss_data_synchronization:
     command:
       - cron
@@ -86,11 +87,8 @@ services:
     environment:
       - SOURCE_USERNAME=admin
       - SOURCE_PASSWORD=district
-      - SOURCE_URL=https://pssnational.intellisoftkenya.com/api/events
       - TARGET_USERNAME=admin
       - TARGET_PASSWORD=district
-      - TARGET_URL=https://pssinternational.intellisoftkenya.com/api/events
-      - SOURCE_DATA_ELEMENTS_URL=https://pssnational.intellisoftkenya.com/api/dataElements
       - PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
       - LANG=C.UTF-8
       - GPG_KEY=E3FF2839C048B25C084DEBE9B26995E310250568
@@ -115,6 +113,7 @@ services:
     ports:
       - 8000:8000/tcp
     working_dir: /app
+    restart: always
   survey-app:
     command:
       - nginx
@@ -146,6 +145,7 @@ services:
       - docker_default
     ports:
       - 3000:3000/tcp
+    restart: always
   core:
     image: "${DHIS2_CORE_IMAGE}"
     container_name: core
