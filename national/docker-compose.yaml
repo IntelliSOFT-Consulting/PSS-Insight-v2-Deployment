@@ -64,8 +64,9 @@ services:
       dockerfile: Dockerfile-dhis_pss_national
     ipc: private
     logging:
-      driver: json-file
-      options: {}
+      driver: journald
+      options:
+        tag: "pss_ws_national"
     mac_address: 02:42:ac:11:00:02
     # network_mode: bridge
     ports:
